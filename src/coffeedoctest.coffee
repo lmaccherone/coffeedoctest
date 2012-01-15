@@ -212,7 +212,7 @@ if sources.length > 0
             trimmedLine = trim(line)
             if trimmedLine.substr(0, 1) == '#'
               expectedResultsArray.push(trimmedLine.replace(/^#\s*/g, ''))
-              resultsContextArray.push('    ' + lines[i-4...i+1].join('\n    '))
+              resultsContextArray.push('    ' + lines[Math.max(0, i-4)...i+1].join('\n    '))
           expectedResultsFilename = path.join(outputdir, documentation.filename + '_expectedresults.txt')
 #           expectedResultsFile = expectedResultsArray.join('\n')
 #           fs.writeFileSync(expectedResultsFilename, expectedResultsFile)
