@@ -6,7 +6,7 @@ Copyright (c) Lawrence S. Maccherone, Jr., 2012
 
 Credits:
 
-* [**coffeedoc**](https://github.com/omarkhan/coffeedoc) by [Omar Khan](http://omarkhan) starting point for coffeedoctest
+* [**coffeedoc**](https://github.com/omarkhan/coffeedoc) by [Omar Khan](http://omarkhan.me) starting point for coffeedoctest
 * **showdown.js** for extracting code blocks from markdown
 
 If you've spent any time working in Python, then you are probably familiar with 
