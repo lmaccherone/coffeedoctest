@@ -2,14 +2,12 @@
 # coffeedoctest #
 Copyright (c) Lawrence S. Maccherone, Jr., 2012
 
-Original copyright Omar Khan http://omarkhan
-
 > It's not about testing your code with your documentation, but more the other way around.
 > Make sure that the examples in your documentation are current with your code.
 
 Credits:
 
-* **coffeedoc** starting point for coffeedoctest
+* **coffeedoc** by Omar Khan (http://omarkhan) starting point for coffeedoctest
 * **showdown.js** for extracting code blocks from markdown
 ###
 
@@ -70,7 +68,8 @@ while opts[0]? and opts[0].substr(0, 1) == '-'
 
 if not parser?
     parser = new parsers.CommonJSParser()
-if opts.length == 0
+    
+if opts.length == 0 and not readme
     opts = ['.']
 
 test = (testFileName, expectedResultsArray, resultsContextArray) ->
@@ -124,6 +123,14 @@ cleanOutputDir = (outputdir) ->
 # clean output before trying to find .coffee files
 cleanOutputDir(outputdir)
 
+
+
+# Get README.md file paths
+readmeFilenames = []
+if readme
+    rootFilenames = fs.readdirSync('.')
+    readmeFilenames = (r for r in rootFilenames when r.toLowerCase() == 'readme.md')
+
 # Get source file paths
 getSourceFiles = (target, a) ->
     if not a?
@@ -133,13 +140,10 @@ getSourceFiles = (target, a) ->
     else if fs.statSync(target).isDirectory()
         getSourceFiles(path.join(target, p), a) for p in fs.readdirSync(target)
 
-sources = []        
+sources = []    
 getSourceFiles(o, sources) for o in opts
 
-
-if sources.length > 0
-    modules = []
-    
+if sources.length > 0 or readmeFilenames.length > 0
     # Make output directory
     fs.mkdirSync(outputdir, '755')
 
@@ -153,7 +157,39 @@ if sources.length > 0
         if path.existsSync(scriptCopyFilename)
             console.log("*** WARNING ***")
             console.log("  file #{path.basename(source)} shows up more than once below #{requirePath}. We're using a random one for all 'require' statements.")
-        fs.writeFileSync(scriptCopyFilename, script)        
+        fs.writeFileSync(scriptCopyFilename, script) 
+
+if readmeFilenames.length > 0
+    for readmeFilename, idx in readmeFilenames
+        readmeFile = fs.readFileSync(readmeFilename, 'utf-8')
+        
+        # Extract the code from the source
+        codeArray = []
+        extractCode({docstring:readmeFile}, codeArray)
+
+        # Write to file
+        if codeArray.length > 0
+          # Write the file
+          testFile = codeArray.join('\n')
+          testFileName = path.join(outputdir, readmeFilename + '_coffeedoctest.coffee')
+          fs.writeFileSync(testFileName, testFile)
+          
+          # Separate the expected results and save it
+          expectedResultsArray = []
+          resultsContextArray = []
+          lines = testFile.split('\n')
+          for line, i in lines
+            trimmedLine = trim(line)
+            if trimmedLine.substr(0, 1) == '#'
+              expectedResultsArray.push(trimmedLine.replace(/^#\s*/g, ''))
+              resultsContextArray.push('    ' + lines[Math.max(0, i-4)...i+1].join('\n    '))
+          expectedResultsFilename = path.join(outputdir, readmeFilename + '_expectedresults.txt')
+          
+          # Run the file capturing its output
+          test(testFileName, expectedResultsArray, resultsContextArray)
+
+if sources.length > 0
+    modules = []       
     
     # Iterate over source scripts
     source_names = (s.replace(/\.coffee$/, '') for s in sources)
@@ -165,7 +201,6 @@ if sources.length > 0
             filename: source_names[idx]
             module_name: path.basename(source)
             module: functions.documentModule(script, parser)
-#             csspath: csspath
 
         # Check for classes inheriting from classes in other modules
         for cls in documentation.module.classes when cls.parent
@@ -229,6 +264,6 @@ if sources.length > 0
       if noErrors or forceClean
         cleanOutputDir(outputdir)
     )
-else
+else if not readme
   console.log('No source files found')
             
