@@ -6,7 +6,7 @@ Copyright (c) Lawrence S. Maccherone, Jr., 2012
 
 Credits:
 
-* (**coffeedoc**)[https://github.com/omarkhan/coffeedoc] by (Omar Khan)[http://omarkhan] starting point for coffeedoctest
+* [**coffeedoc**](https://github.com/omarkhan/coffeedoc) by [Omar Khan](http://omarkhan) starting point for coffeedoctest
 * **showdown.js** for extracting code blocks from markdown
 
 If you've spent any time working in Python, then you are probably familiar with 
@@ -17,7 +17,7 @@ use your library/API/tool/etc. But if the examples are wrong, it's like labeling
 
 **coffeedoctest** is a way to test your documentation with your code... to make sure the map matches the terrain.
 
-I'm building upon Omar Khan's awesome (coffedoc)[https://github.com/omarkhan/coffeedoc] tool and using the 
+I'm building upon Omar Khan's awesome [coffedoc](https://github.com/omarkhan/coffeedoc) tool and using the 
 same conventions. The text within multiline comments is interpreted as markdown markup. Any code blocks (each line 
 that starts with 4 or more spaces) within this markdown is pulled out as "test" code. Any single line comments 
 within these code blocks are treated as your expected output. When this example code runs, it should generate 
@@ -98,4 +98,7 @@ A typical usage might look like this:
 ## Installation ##
 
     npm install -g coffeedoctest
-        
+    
+If that doesn't work, you can try...
+
+    sudo npm install -g coffeedoctest
