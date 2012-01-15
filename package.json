@@ -1,14 +1,19 @@
 {
   "name": "coffeedoctest",
-  "description": "Test your documentation (code examples in markdown block comments or README.md).",
+  "description": "Test your documentation (code examples in markdown-formatted block comments or README.md).",
   "keywords": [
     "documentation",
     "docs",
     "test",
-    "coffeescript"
+    "coffeescript",
+    "doctest"
   ],
-  "author": "Larry Maccherone",
+  "author": {
+    "name": "Larry Maccherone",
+    "url": "http://maccherone.com"
+  },
   "version": "0.1.0",
+  "homepage": "https://github.com/lmaccherone/coffeedoctest",
   "licenses": [
     {
       "type": "MIT",
@@ -19,11 +24,16 @@
     "node": ">=0.4.10"
   },
   "dependencies": {
-    "coffee-script": ">=1.1.1",
+    "coffee-script": ">=1.1.1"
   },
   "bin": {
     "coffeedoctest": "./bin/coffeedoctest"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "http://github.com/lmaccherone/coffeedoctest.git"
+  },
+  "preferGlobal": true,
   "devDependencies": {
   }
 }
