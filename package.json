@@ -1,0 +1,29 @@
+{
+  "name": "coffeedoctest",
+  "description": "Test your documentation (code examples in markdown block comments or README.md).",
+  "keywords": [
+    "documentation",
+    "docs",
+    "test",
+    "coffeescript"
+  ],
+  "author": "Larry Maccherone",
+  "version": "0.1.0",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "engines": {
+    "node": ">=0.4.10"
+  },
+  "dependencies": {
+    "coffee-script": ">=1.1.1",
+  },
+  "bin": {
+    "coffeedoctest": "./bin/coffeedoctest"
+  },
+  "devDependencies": {
+  }
+}
