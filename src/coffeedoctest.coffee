@@ -137,7 +137,7 @@ getSourceFiles = (target, a) ->
       a = []
     if path.extname(target) == '.coffee'
         a.push(target)
-    else if fs.statSync(target).isDirectory()
+    else if fs.statSync(target).isDirectory() and target != outputdir
         getSourceFiles(path.join(target, p), a) for p in fs.readdirSync(target)
 
 sources = []    
