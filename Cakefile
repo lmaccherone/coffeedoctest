@@ -20,7 +20,7 @@ task('install', 'install `coffeedoctest` globally but from this source using npm
   run('npm install -g .')
 )
 
-task('publish', 'Publish to npm', () ->
+task('publish', 'Publish to npm (may need to run twice)', () ->
   process.chdir(__dirname)
   run('npm publish .')
 )
