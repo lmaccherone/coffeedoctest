@@ -83,22 +83,15 @@ If you type `coffeedoctest` with no options or `coffeedoctest -h`, you'll get th
         --clean       : Deletes temporary files even if there is an error
         --requirepath : Specifies "require" search root (default "./")
         
-**coffeedoctest** will copy needed `.coffee` files into a `node_modules` folder within the the coffeedoctest temporary 
+**coffeedoctest** will create a modified version of your package.json file in the coffeedoctest temporary 
 working directory. This makes it possible for your example code to do simple `require`s so you don't 
 clutter your example code with relative paths that may not apply to your users' usage.
 
-The `--requirepath <folder with modules your examples require>` option will allow you to specify a subset of your 
-project tree to go into this temporary node_modules folder. If you do not specify a `--requirepath`, it will copy 
-all `.coffee` files it finds from the current directory down.
-
 A typical usage might look like this:
 
-    coffeedoctest --readme --requirepath src src
+    coffeedoctest --readme src
 
 ## Installation ##
 
-    npm install -g coffeedoctest
-    
-If that doesn't work, you can try...
-
     sudo npm install -g coffeedoctest
+    

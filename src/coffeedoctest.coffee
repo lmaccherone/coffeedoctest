@@ -25,7 +25,6 @@ OPTIONS =
     '--requirejs   ': 'Use if target scripts use RequireJS for module loading'
     '--readme      ': 'Use if you want it to run tests in your README.md file'
     '--clean       ': 'Deletes temporary files even if there is an error'
-    '--requirepath ': 'Specifies "require" search root (default "./")'
 
 help = ->
     ### Show help message and exit ###
@@ -48,7 +47,6 @@ if process.platform == "win32"
   pathDelimiter = '\\'
 else
   pathDelimiter = '/'
-requirePath = '.' + pathDelimiter 
 
 while opts[0]? and opts[0].substr(0, 1) == '-'
     o = opts.shift()
@@ -63,8 +61,6 @@ while opts[0]? and opts[0].substr(0, 1) == '-'
             readme = true
         when '--clean'
             forceClean = true
-        when '--requirepath'
-            requirePath = opts.shift()
 
 if not parser?
     parser = new parsers.CommonJSParser()
