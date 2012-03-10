@@ -134,7 +134,7 @@ if readme
 # Get source file paths
 getSourceFiles = (target, a) ->
     if not a?
-      a = []
+        a = []
     if path.extname(target) == '.coffee'
         a.push(target)
     else if fs.statSync(target).isDirectory() and target != outputdir
@@ -146,18 +146,15 @@ getSourceFiles(o, sources) for o in opts
 if sources.length > 0 or readmeFilenames.length > 0
     # Make output directory
     fs.mkdirSync(outputdir, '755')
+    
+    # Write package.json
+    packageJSONFileName = './package.json'
+    packageJSONFileContents = fs.readFileSync(packageJSONFileName, 'utf-8')
+    packageJSON = JSON.parse(packageJSONFileContents)
+    packageJSON.main = '../' + packageJSON.main
+    outputPackageJSON = path.join(outputdir, 'package.json')
+    fs.writeFileSync(outputPackageJSON, JSON.stringify(packageJSON))
 
-    # Populate node_modules with everything that might be needed
-    fs.mkdirSync(path.join(outputdir, 'node_modules'), '755')
-    allSources = []
-    getSourceFiles(requirePath, allSources)
-    for source, idx in allSources
-        script = fs.readFileSync(source, 'utf-8')
-        scriptCopyFilename = path.join(outputdir, 'node_modules', path.basename(source)) 
-        if path.existsSync(scriptCopyFilename)
-            console.log("*** WARNING ***")
-            console.log("  file #{path.basename(source)} shows up more than once below #{requirePath}. We're using a random one for all 'require' statements.")
-        fs.writeFileSync(scriptCopyFilename, script) 
 
 if readmeFilenames.length > 0
     for readmeFilename, idx in readmeFilenames
