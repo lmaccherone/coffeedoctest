@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/lmaccherone/coffeedoctest.png)](http://travis-ci.org/lmaccherone/coffeedoctest)
 # coffeedoctest #
 Copyright (c) Lawrence S. Maccherone, Jr., 2012
 
