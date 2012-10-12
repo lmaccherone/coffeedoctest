@@ -95,3 +95,7 @@ A typical usage might look like this:
 
     sudo npm install -g coffeedoctest
     
+## Changelog ##
+
+* 0.4.0 - 2012-10-10 - Now creates a package.json so the tests don't need to worry about location of require() calls
+    

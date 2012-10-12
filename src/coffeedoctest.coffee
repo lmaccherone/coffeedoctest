@@ -113,7 +113,7 @@ rm = (target) ->
         fs.unlinkSync(target)
         
 cleanOutputDir = (outputdir) ->
-    if path.existsSync(outputdir)
+    if fs.existsSync(outputdir)
         rm(outputdir)
 
 # clean output before trying to find .coffee files
@@ -223,7 +223,7 @@ if sources.length > 0
               sourcepath = source.split(pathDelimiter)
               for dir in sourcepath[0...sourcepath.length - 1]
                   docpath = path.join(docpath, dir)
-                  if not path.existsSync(docpath)
+                  if not fs.existsSync(docpath)
                       fs.mkdirSync(docpath, '755')
 
 
