@@ -33,7 +33,7 @@
     "type" : "git",
     "url" : "http://github.com/lmaccherone/coffeedoctest.git"
   },
-  "preferGlobal": true,
+  "preferGlobal": false,
   "devDependencies": {
   }
 }

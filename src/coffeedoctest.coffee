@@ -68,6 +68,18 @@ if not parser?
 if opts.length == 0 and not readme
     opts = ['.']
 
+noErrors = true
+process.on('exit', () ->
+  if noErrors or forceClean
+    cleanOutputDir(outputdir)
+  if noErrors
+    console.log('No documentation errors found.')
+    process.exit(0)
+  else
+    console.log('\nErrors found. Exiting coffeedoctest with code 1.')
+    process.exit(1)
+)
+
 test = (testFileName, expectedResultsArray, resultsContextArray) ->
   ###
   Helper function to run the test and check the output
@@ -90,6 +102,7 @@ test = (testFileName, expectedResultsArray, resultsContextArray) ->
         console.log('Actual  : ' + actualResult)
         console.log('Near...')
         console.log(resultsContextArray[i])
+        process.exit(1)
   )
   
 trim = (val) ->
@@ -251,12 +264,8 @@ if sources.length > 0
         # Save to modules array for the index page
         modules.push(documentation)
 
-    process.on('exit', () ->   
-      if noErrors
-        console.log('No documentation errors found')
-      if noErrors or forceClean
-        cleanOutputDir(outputdir)
-    )
+
+
 else if not readme
   console.log('No source files found')
             
