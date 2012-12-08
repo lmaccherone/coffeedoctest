@@ -1,7 +1,7 @@
 {
   "name": "coffeedoctest",
   "description": "Test your documentation (code examples in markdown-formatted block comments or README.md).",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "keywords": [
     "documentation",
     "docs",

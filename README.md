@@ -98,6 +98,7 @@ A typical usage might look like this:
     
 ## Changelog ##
 
+* 0.4.2 - 2012-12-07 - Updated dependencies
 * 0.4.1 - 2012-12-07 - No longer prefers global install
 * 0.4.0 - 2012-10-10 - Now creates a package.json so the tests don't need to worry about location of require() calls
     
