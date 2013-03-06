@@ -76,7 +76,7 @@ process.on('exit', () ->
     console.log('No documentation errors found.')
     process.exit(0)
   else
-    console.log('\nErrors found. Exiting coffeedoctest with code 1.')
+    console.error('\nErrors found. Exiting coffeedoctest with code 1.')
     process.exit(1)
 )
 
@@ -87,21 +87,23 @@ test = (testFileName, expectedResultsArray, resultsContextArray) ->
   command = 'coffee ' + testFileName
   exec(command, (error, stdout, stderr) ->
     if stderr.length > 0
-      console.log("Stderr exec'ing command '#{command}'...\n" + stderr)
+      console.error("Stderr exec'ing command '#{command}'...\n" + stderr)
+      noErrors = false
     if error?
-      console.log('exec error: ' + error)
+      console.error('exec error: ' + error)
+      noErrors = false
     actualResultsArray = stdout.split('\n')
     for expectedResult, i in expectedResultsArray
       actualResult = actualResultsArray[i]
       if trim(actualResult) != trim(expectedResult)
         if noErrors
           noErrors = false
-          console.log('\n*** ERRORS FOUND IN YOUR DOCUMENTATION ***')
-        console.log("\nActual does not match expected when running #{testFileName}")
-        console.log('Expected: ' + expectedResult)
-        console.log('Actual  : ' + actualResult)
-        console.log('Near...')
-        console.log(resultsContextArray[i])
+          console.error('\n*** ERRORS FOUND IN YOUR DOCUMENTATION ***')
+        console.error("\nActual does not match expected when running #{testFileName}")
+        console.error('Expected: ' + expectedResult)
+        console.error('Actual  : ' + actualResult)
+        console.error('Near...')
+        console.error(resultsContextArray[i])
         process.exit(1)
   )
   
@@ -267,5 +269,5 @@ if sources.length > 0
 
 
 else if not readme
-  console.log('No source files found')
+  console.error('No source files found')
             

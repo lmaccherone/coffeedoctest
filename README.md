@@ -94,10 +94,12 @@ A typical usage might look like this:
 
 ## Installation ##
 
-    sudo npm install -g coffeedoctest
+    npm install coffeedoctest --save-dev
     
 ## Changelog ##
 
+* 0.5.0 - 2013-03-06 - Upgraded to CoffeeScript 1.6.x
+* 0.4.3 - 2012-12-07 - Errors output to console.error so exec-sync fails
 * 0.4.2 - 2012-12-07 - Updated dependencies
 * 0.4.1 - 2012-12-07 - No longer prefers global install
 * 0.4.0 - 2012-10-10 - Now creates a package.json so the tests don't need to worry about location of require() calls
